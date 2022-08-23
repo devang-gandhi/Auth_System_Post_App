@@ -1,0 +1,99 @@
+###############################
+
+query GET_ALL_POSTS{
+  getAllPosts {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+
+################################
+
+query GET_POST_ID($id: ID!){
+  getPostByID(id: $id) {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+
+#################################
+
+
+mutation CREATE_NEW_POST($title: String!, $content: String!){
+  createNewPost(newPost: {title : $title, content: $content}) {
+    title
+    content
+    createdAt
+    updatedAt
+  }
+}
+
+#################################
+
+mutation EDIT_POST($title: String!, $content: String!, $id: ID!){
+  editPostById(updatedPost: {
+    title : $title,
+    content : $content
+  },
+  id : $id)
+  {
+    id
+    title
+    content
+    createdAt
+    updatedAt
+  } 
+}
+
+##################################
+
+mutation DELETE_POST($id : ID!) {
+  deletePostById(id: $id) {
+    id
+    message
+    success
+  }
+}
+
+##################################
+
+mutation CREATE_USER($userName: String!, $firstName: String!, $lastName: String!, $email: String!, $password: String!){
+  registerUser(newUser:{
+    userName: $userName,
+    firstName: $firstName,
+    lastName: $lastName,
+    email: $email,
+    password: $password,
+  })
+  {
+    token
+    user {
+      id
+      userName
+      firstName
+      lastName
+      email
+    }
+  }
+}
+
+#####################################
+
+query AUTH_USER($userName: String!, $password: String!){
+  authenticatedUser(userName: $userName, password: $password) {
+    user {
+      id
+      userName
+      firstName
+      lastName
+      email
+    }
+    token
+  }
+}
